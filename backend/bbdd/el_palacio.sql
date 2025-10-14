@@ -154,6 +154,26 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `emai
 (25, 'pedro', 'julian', 'pepitorodriguez@correofalso.com', '$2y$10$22IhVscSJZrekcHAvJKQCeb5o1pObJeIq/3zC8cdKZ/KHCT.YOWXq', 'cliente'),
 (26, 'pepe', 'pedro', 'pepitorodriguez@correofalso.com', '$2y$10$mdYQCQznReeF9gXtpGMz9.RisXyWaZo0uHBWhavVHpr2GywNGsiFC', 'cliente');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reservas`
+--
+
+CREATE TABLE `reservas` (
+  `id_reserva` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `telefono` varchar(50) NOT NULL,
+  `personas` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `comentarios` text DEFAULT NULL,
+  `estado` varchar(50) NOT NULL DEFAULT 'pendiente',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Índices para tablas volcadas
 --
@@ -250,6 +270,14 @@ ALTER TABLE `productos`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+-- AUTO_INCREMENT de la tabla `reservas`
+-- (si la tabla fue añadida al volcado, aseguramos PK y AUTO_INCREMENT)
+ALTER TABLE `reservas`
+  ADD PRIMARY KEY (`id_reserva`);
+
+ALTER TABLE `reservas`
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
