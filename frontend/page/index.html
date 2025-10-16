@@ -36,15 +36,13 @@
                 <a class="nav-link" href="#reservas">Reservas</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="#ubicacion">¿Donde nos encontramos?</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="#contacto">Contacto</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="login.html">👤</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" id="carritoBtn">
-                  🛒 <span id="carritoCantidad" class="badge bg-primary">0</span>
-                </a>
               </li>
             </ul>
           </div>
@@ -185,6 +183,70 @@
       </div>
     </section>
 
+    <!-- New location section with Google Maps -->
+    <section id="ubicacion" class="section">
+      <div class="container">
+        <h2 class="section-title">¿Donde nos encontramos?</h2>
+        <p class="section-subtitle">Visítanos en Colonia del Sacramento</p>
+        
+        <!-- Improved map container with better styling -->
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.8!2d-57.8397!3d-34.4628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x950b1e1e1e1e1e1e%3A0x1e1e1e1e1e1e1e1e!2sGral.%20Flores%20462%2C%2070000%20Colonia%20del%20Sacramento%2C%20Departamento%20de%20Colonia!5e0!3m2!1ses!2suy!4v1234567890123!5m2!1ses!2suy"
+            width="100%" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de El Palacio">
+          </iframe>
+        </div>
+        
+        <!-- Redesigned location info cards with icons and better styling -->
+        <div class="location-info-grid">
+          <div class="location-card">
+            <div class="location-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Dirección</h3>
+            <p>Gral. Flores 462<br>70000 Colonia del Sacramento<br>Departamento de Colonia</p>
+            <a href="https://www.google.com/maps/dir//Gral.+Flores+462,+70000+Colonia+del+Sacramento" target="_blank" class="location-link">Cómo llegar</a>
+          </div>
+          
+          <div class="location-card">
+            <div class="location-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 16.92V19.92C22 20.52 21.52 21 20.92 21C9.4 21 0 11.6 0 0.08C0 -0.52 0.48 -1 1.08 -1H4.08C4.68 -1 5.16 -0.52 5.16 0.08V3.08" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Teléfono</h3>
+            <p class="phone-number">4522 9753</p>
+            <a href="tel:45229753" class="location-link">Llamar ahora</a>
+          </div>
+          
+          <div class="location-card">
+            <div class="location-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Horarios</h3>
+            <div class="hours-info">
+              <p class="hours-days">Lunes a Domingo</p>
+              <p class="hours-time">10:00 - 16:00</p>
+              <p class="hours-time">19:30 - 00:00</p>
+            </div>
+            <p class="hours-note">Abierto todos los días</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Simplified contact section in Spanish -->
     <section id="contacto" class="section">
       <div class="container">
@@ -273,26 +335,9 @@
       </div>
     </section>
 
-    <div id="carritoModal" class="modal" tabindex="-1" style="display:none;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Carrito de compras</h5>
-            <button type="button" class="btn-close" onclick="cerrarCarrito()"></button>
-          </div>
-          <div class="modal-body" id="carritoContenido">
-            <p>Tu carrito está vacío.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="cerrarCarrito()">Cerrar</button>
-            <button type="button" class="btn btn-primary" onclick="finalizarCompra()">Finalizar compra</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script src="../js/carta.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+
   </body>
 </html>

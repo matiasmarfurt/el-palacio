@@ -119,49 +119,19 @@ body {
   margin: 8px 0 15px;
 }
 
-/* Botón agregar al carrito */
-.grid-item .btn-agregar {
-    background: #007bff;
-
-  border: none;
-  border-radius: 6px;
-  padding: 10px 22px;
-  color: white;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.3s;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  box-shadow: 0 2px 8px rgba(51,51,51,0.08);
-  width: 70%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.grid-item .btn-agregar:hover {
-  background: #0056b3;
-}
-
-/* Precio más grande y destacado */
 .precio {
-  display: inline-block;
-  background: #555;
-  color: #fff;
-  border-radius: 14px;
-  padding: 6px 16px;
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin-bottom: 10px;
+  background: #333;
+  color: white;
   border: none;
-  cursor: default;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-  transition: background 0.3s;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
 }
 
 .precio:hover {
-  background: #0056b3;
+  background: #555;
 }
 
 /* Simplified overlay design */
@@ -328,11 +298,123 @@ body {
   text-align: center;
 }
 
-.carrito-total {
-  font-size: 1.1rem;
-  font-weight: 500;
+/* Added styles for the new location section */
+.map-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  margin-bottom: 50px;
+  border: 1px solid #e0e0e0;
+}
+
+.map-container iframe {
+  display: block;
+  width: 100%;
+}
+
+.location-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.location-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.location-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.location-icon {
+  background: #333;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  transition: background 0.3s ease;
+}
+
+.location-card:hover .location-icon {
+  background: #555;
+}
+
+.location-icon svg {
+  color: white;
+}
+
+.location-card h3 {
   color: #333;
-  align-self: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.location-card p {
+  color: #666;
+  line-height: 1.8;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.phone-number {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin: 10px 0;
+}
+
+.location-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 8px 20px;
+  border: 2px solid #333;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.location-link:hover {
+  background: #333;
+  color: white;
+}
+
+.hours-info {
+  margin: 15px 0;
+}
+
+.hours-days {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.hours-time {
+  color: #666;
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.hours-note {
+  margin-top: 15px;
+  color: #999;
+  font-size: 0.85rem;
+  font-style: italic;
 }
 
 .footer-bottom {
@@ -340,86 +422,16 @@ body {
   border-top: 1px solid #e0e0e0;
   padding: 20px 0;
   text-align: center;
-  position: fixed;  
-  bottom: 0;        
+  position: fixed;
+  bottom: 0;
   left: 0;
-  width: 100%;   
+  width: 100%;
 }
 
 .footer-bottom p {
   color: #666;
   margin: 0;
   font-size: 0.9rem;
-}
-
-/* Carrito modal */
-#carritoModal.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2000;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#carritoModal .modal-dialog {
-  max-width: 400px;
-  width: 100%;
-}
-
-#carritoModal .modal-content {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-#carritoModal .modal-header {
-  background: #333;
-  color: #fff;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#carritoModal .modal-title {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-#carritoModal .btn-close {
-  background: none;
-  border: none;
-  font-size: 1.3rem;
-  color: #fff;
-  cursor: pointer;
-}
-
-#carritoModal .modal-body {
-  padding: 20px;
-  background: #fff;
-}
-
-#carritoModal .modal-footer {
-  padding: 15px 20px;
-  background: #f8f9fa;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-/* Badge del carrito */
-#carritoCantidad.badge {
-  font-size: 0.85rem;
-  vertical-align: top;
-  margin-left: 2px;
-  background: #007bff;
-  color: #fff;
-  border-radius: 50%;
-  padding: 3px 7px;
 }
 
 /* Improved responsive design */
@@ -453,6 +465,19 @@ body {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
+  .map-container iframe {
+    height: 350px;
+  }
+
+  .location-info-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .location-card {
+    padding: 30px 20px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -472,5 +497,23 @@ body {
 
   .simple-form {
     padding: 0 15px;
+  }
+
+  .map-container iframe {
+    height: 300px;
+  }
+
+  .location-card {
+    padding: 25px 15px;
+  }
+
+  .location-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .location-icon svg {
+    width: 20px;
+    height: 20px;
   }
 }
