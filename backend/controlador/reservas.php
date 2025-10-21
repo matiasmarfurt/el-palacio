@@ -47,8 +47,10 @@ function listarReservas()
     global $reservaModel;
     $resultado = $reservaModel->listarTodos();
     if ($resultado['success']) {
-        http_response_code(200);
-        echo json_encode($resultado['data']);
+        echo json_encode([
+            "success" => true,
+            "reservas" => $resultado['data']
+        ]);
     } else {
         http_response_code(500);
         echo json_encode(["error" => $resultado['error'] ?? 'Error al obtener reservas']);

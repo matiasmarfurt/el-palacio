@@ -67,22 +67,69 @@ class Usuario
     // Método para obtener usuario por email o nombre y verificar contraseña
     public function logear($usuario, $password)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM usuario WHERE email = ? OR nombre_usuario = ?");
+        // Buscar al usuario por email o nombre (solo un registro esperado)
+        $stmt = $this->conn->prepare("SELECT * FROM usuario WHERE email = ? OR nombre_usuario = ? LIMIT 1");
         if (!$stmt) {
-            die("Error en prepare: " . $this->conn->error);
+            error_log("[Usuario::logear] Error en prepare: " . $this->conn->error);
+            return null;
         }
 
         $stmt->bind_param('ss', $usuario, $usuario);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            error_log("[Usuario::logear] Error en execute: " . $stmt->error);
+            return null;
+        }
 
         $resultado = $stmt->get_result()->fetch_assoc();
 
-        // Verificar contraseña y devolver datos (sin password) o null si no coincide
-        if ($resultado && password_verify($password, $resultado['password'])) {
+        // Si no hay usuario, retornar null
+        if (!$resultado) {
+            return null;
+        }
+
+        $stored = $resultado['password'];
+
+        // Caso 1: la contraseña almacenada está hasheada y coincide
+        if (password_verify($password, $stored)) {
+            // Si el hash necesita rehash, actualizar en background
+            if (password_needs_rehash($stored, PASSWORD_DEFAULT)) {
+                $newHash = password_hash($password, PASSWORD_DEFAULT);
+                $this->actualizarPasswordPorId($resultado['id_usuario'], $newHash);
+            }
+
             unset($resultado['password']);
             return $resultado;
         }
 
+        // Caso 2: migración — la contraseña en la BBDD está en texto plano y coincide exactamente
+        if ($stored === $password) {
+            $newHash = password_hash($password, PASSWORD_DEFAULT);
+            // Intentar actualizar el password al hash; si falla, igual devolvemos el usuario autenticado
+            $this->actualizarPasswordPorId($resultado['id_usuario'], $newHash);
+
+            unset($resultado['password']);
+            return $resultado;
+        }
+
+        // No coincide
         return null;
+    }
+
+    // Método privado para actualizar el password (hash) por id de usuario
+    private function actualizarPasswordPorId($idUsuario, $newHash)
+    {
+        $stmt = $this->conn->prepare("UPDATE usuario SET password = ? WHERE id_usuario = ?");
+        if (!$stmt) {
+            error_log("[Usuario::actualizarPasswordPorId] Error en prepare: " . $this->conn->error);
+            return false;
+        }
+
+        $stmt->bind_param('si', $newHash, $idUsuario);
+        if (!$stmt->execute()) {
+            error_log("[Usuario::actualizarPasswordPorId] Error en execute: " . $stmt->error);
+            return false;
+        }
+
+        return true;
     }
 }
