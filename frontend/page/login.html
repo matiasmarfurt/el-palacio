@@ -7,6 +7,8 @@
     <title>Inicio de Sesión - El Palacio</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/sesion.css?v=20251017">
+    <!-- Agregar estilos del widget flotante de ayuda -->
+    <link rel="stylesheet" href="../css/ayuda-flotante.css">
 </head>
 
 <body>
@@ -32,8 +34,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.html#contacto">Contacto</a>
                         </li>
+                        <!-- Elemento dinámico que mostrará el nombre del usuario o el icono de login -->
                         <li class="nav-item">
-                            <a class="nav-link active" href="login.html">👤</a>
+                            <a class="nav-link active" href="login.html" id="userLink">👤</a>
                         </li>
                     </ul>
                 </div>
@@ -114,9 +117,77 @@
         </div>
     </footer>
 
+    <!-- Agregar widget flotante de ayuda -->
+    <!-- Botón flotante -->
+    <button id="boton-ayuda-flotante" title="¿Necesita ayuda?">💬</button>
+
+    <!-- Widget de ayuda expandido -->
+    <div id="widget-ayuda-flotante">
+      <div class="widget-header">
+        <h3>¿Necesita ayuda?</h3>
+        <p>Contáctenos si tiene alguna pregunta</p>
+        <button id="cerrar-widget-ayuda">✕</button>
+      </div>
+      <div class="widget-content">
+        <!-- WhatsApp -->
+        <a href="https://wa.me/598XXXXXXXXX?text=Hola%20El%20Palacio%2C%20tengo%20una%20consulta" target="_blank" class="opcion-contacto">
+          <div class="opcion-icono">📱</div>
+          <div class="opcion-info">
+            <h4>WhatsApp</h4>
+            <p>El Palacio - Consultas</p>
+          </div>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://instagram.com/elpalacio" target="_blank" class="opcion-contacto">
+          <div class="opcion-icono">📷</div>
+          <div class="opcion-info">
+            <h4>Instagram</h4>
+            <p>@elpalacio</p>
+          </div>
+        </a>
+
+        <!-- Teléfono -->
+        <a href="tel:45229753" class="opcion-contacto">
+          <div class="opcion-icono">☎️</div>
+          <div class="opcion-info">
+            <h4>Teléfono</h4>
+            <p>4522 9753</p>
+          </div>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:reservas@elpalacio.com" class="opcion-contacto">
+          <div class="opcion-icono">✉️</div>
+          <div class="opcion-info">
+            <h4>Email</h4>
+            <p>reservas@elpalacio.com</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
     <script src="../js/usuario.js"></script>
     <script src="../js/navbar.js"></script>
+    <!-- Agregar script del widget flotante -->
+    <script src="../js/ayuda-flotante.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script to dynamically update the navbar link based on user login status
+        document.addEventListener('DOMContentLoaded', function() {
+            const userLink = document.getElementById('userLink');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+            if (isLoggedIn) {
+                const username = localStorage.getItem('username');
+                userLink.textContent = username;
+                userLink.href = "perfil.html";
+            } else {
+                userLink.textContent = '👤';
+                userLink.href = "login.html";
+            }
+        });
+    </script>
 </body>
 
 </html>

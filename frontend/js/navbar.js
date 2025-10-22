@@ -1,21 +1,97 @@
-// Script para darle dinamismo al menú hamburgesa del Navbar
+// Script para darle dinamismo al menú hamburguesa del Navbar
 
 document.addEventListener("DOMContentLoaded", () => {
-  const navbarToggler = document.querySelector(".navbar-toggler");
-  const navbarCollapse = document.getElementById("navbarNav");
-  const navLinks = document.querySelectorAll(".nav-link");
+  const navbarToggler = document.querySelector(".navbar-toggler")
+  const navbarCollapse = document.getElementById("navbarNav")
+  const navLinks = document.querySelectorAll(".nav-link")
 
   // Cerrar el menú al hacer clic en un enlace
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
       if (navbarToggler.offsetParent !== null) {
-        navbarToggler.click();
+        navbarToggler.click()
       }
-    });
-  });
+    })
+  })
 
   // Mostrar animación o cambio de ícono
   navbarToggler.addEventListener("click", () => {
-    navbarToggler.classList.toggle("active");
-  });
-});
+    navbarToggler.classList.toggle("active")
+  })
+
+  mostrarNombreUsuarioEnNavbar()
+})
+
+function mostrarNombreUsuarioEnNavbar() {
+  const usuarioJSON = localStorage.getItem("usuario")
+
+  if (usuarioJSON) {
+    try {
+      const usuario = JSON.parse(usuarioJSON)
+      const nombreCompleto = `${usuario.nombre_usuario} ${usuario.apellido_usuario}`
+
+      // Buscar el elemento del icono de usuario en el navbar
+      const userLink = document.querySelector(".navbar-nav .nav-item:last-child .nav-link")
+
+      if (userLink) {
+        // Reemplazar el icono con el nombre del usuario
+        userLink.textContent = nombreCompleto
+        userLink.href = "#" // Cambiar href para que no sea un enlace de navegación
+        userLink.style.cursor = "pointer"
+
+        // Agregar evento para cerrar sesión al hacer clic
+        userLink.addEventListener("click", (e) => {
+          e.preventDefault()
+          mostrarMenuUsuario(usuario)
+        })
+      }
+    } catch (error) {
+      console.error("Error al parsear datos del usuario:", error)
+    }
+  }
+}
+
+function mostrarMenuUsuario(usuario) {
+  const menuExistente = document.getElementById("userMenu")
+
+  if (menuExistente) {
+    menuExistente.remove()
+    return
+  }
+
+  const menu = document.createElement("div")
+  menu.id = "userMenu"
+  menu.style.cssText = `
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    min-width: 200px;
+  `
+
+  menu.innerHTML = `
+    <div style="padding: 10px;">
+      <p style="margin: 0 0 10px 0; font-weight: bold;">${usuario.nombre_usuario} ${usuario.apellido_usuario}</p>
+      <p style="margin: 0 0 10px 0; font-size: 0.9em; color: #666;">${usuario.email}</p>
+      <button id="cerrarSesionBtn" style="width: 100%; padding: 8px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Cerrar Sesión</button>
+    </div>
+  `
+
+  document.body.appendChild(menu)
+
+  document.getElementById("cerrarSesionBtn").addEventListener("click", () => {
+    localStorage.removeItem("usuario")
+    window.location.href = "../page/index.html"
+  })
+
+  // Cerrar menú al hacer clic fuera
+  document.addEventListener("click", (e) => {
+    if (!menu.contains(e.target) && !e.target.classList.contains("nav-link")) {
+      menu.remove()
+    }
+  })
+}

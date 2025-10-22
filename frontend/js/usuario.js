@@ -1,4 +1,5 @@
-const API_URL = "../../backend/api/api_usuarios.php" // URL base del endpoint para usuarios (API REST PHP)
+// URL base del endpoint para usuarios (API REST PHP)
+const API_URL = "../../backend/api/api_usuarios.php"
 
 // Esperar a que el DOM esté listo para agregar el listener al formulario de login
 document.addEventListener("DOMContentLoaded", () => {
@@ -58,7 +59,8 @@ function enviarLogin(event) {
       // Si el login es exitoso, guardar usuario en localStorage y redirigir
       if (data.success && data.usuario) {
         mostrarAnimacionExito()
-        localStorage.setItem("usuario", JSON.stringify(data.usuario)) // Guarda la sesión del usuario
+        // Guarda la sesión del usuario en localStorage
+        localStorage.setItem("usuario", JSON.stringify(data.usuario))
 
         // Redirige después de mostrar la animación (espera 3 segundos)
         setTimeout(() => {
