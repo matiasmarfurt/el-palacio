@@ -1,4 +1,4 @@
-const API_URL = "../../backend/api/api_productos.php"; // URL base del endpoint para productos (API REST PHP)
+const API_PRODUCTOS_CRUD = "../../backend/api/api_productos.php"; // URL base del endpoint para productos (API REST PHP)
 
 window.onload = function () {
   listarProductos(); // Llama a la función para listar productos al cargar la página
@@ -8,7 +8,7 @@ let productos = []; // Variable array para almacenar los productos
 
 // Obtener todos los productos (GET)
 function listarProductos() {
-  fetch(API_URL)
+  fetch(API_PRODUCTOS_CRUD)
     .then((res) => res.json())
     .then((data) => {
       productos = data;
@@ -109,7 +109,7 @@ function enviarModificacion(event) {
 
 // Obtener un producto por ID (GET)
 function mostrarProducto(id) {
-  fetch(API_URL + "?id=" + id)
+  fetch(API_PRODUCTOS_CRUD + "?id=" + id)
     .then((res) => res.json())
     .then((data) => console.log("Producto:", data))
     .catch((err) => console.error("Error al obtener producto:", err));
@@ -117,7 +117,7 @@ function mostrarProducto(id) {
 
 // Agregar un producto nuevo (POST)
 function agregarProducto(nombre, descripcion, precio, categoria) {
-  fetch(API_URL, {
+  fetch(API_PRODUCTOS_CRUD, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ nombre, descripcion, precio, categoria }),
@@ -132,7 +132,7 @@ function agregarProducto(nombre, descripcion, precio, categoria) {
 
 // Modificar un producto (PUT)
 function modificarProducto(id, nombre, descripcion, precio, categoria) {
-  fetch(API_URL, {
+  fetch(API_PRODUCTOS_CRUD, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id, nombre, descripcion, precio, categoria }),
@@ -147,7 +147,7 @@ function modificarProducto(id, nombre, descripcion, precio, categoria) {
 
 // Eliminar un producto (DELETE)
 function eliminarProducto(id) {
-  fetch(API_URL + "?id=" + id, {
+  fetch(API_PRODUCTO_CRUD + "?id=" + id, {
     method: "DELETE",
   })
     .then((res) => res.json())
@@ -160,7 +160,7 @@ function eliminarProducto(id) {
 
 // Buscar productos por nombre (GET)
 function buscarProductos(texto) {
-  fetch(API_URL + "?buscar=" + encodeURIComponent(texto))
+  fetch(API_PRODUCTOS_CRUD + "?buscar=" + encodeURIComponent(texto))
     .then((res) => res.json())
     .then((data) => {
       mostrarTablaProductos(data);

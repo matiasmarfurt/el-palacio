@@ -1,4 +1,4 @@
-const API_URL = "../../backend/api/api_productos.php"; // URL base del endpoint para productos (API REST PHP)
+const API_PRODUCTOS = "../../backend/api/api_productos.php"; // URL base del endpoint para productos (API REST PHP)
 
 window.onload = function () {
   listarProductosCarta();
@@ -79,8 +79,8 @@ function cerrarCarrito() {
 
 // Obtener todos los productos (GET)
 function listarProductosCarta() {
-  fetch(API_URL)
-    .then((res) => res.json())
+  fetch(API_PRODUCTOS)
+    .then((response) => response.json())
     .then((data) => {
       productos = data;
       mostrarCartaPorCategoria(productos, "Carnes", "carnesContainer");
