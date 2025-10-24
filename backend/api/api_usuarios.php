@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . "/../logs/log.php"; // Importar el archivo de configuración de registro de errores
+require __DIR__ . "/../middleware/auth.php"; // Importar el middleware de autenticación
 
 // Habilitar CORS
 header("Access-Control-Allow-Origin: *");
@@ -20,18 +21,20 @@ require __DIR__ . "/../controlador/usuarios.php"; // Importar el controlador
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 if ($requestMethod == "GET") {
+    // Solo admin puede listar usuarios
+    requireAuth("admin");
     listarUsuarios();
 } elseif ($requestMethod == "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    // Registro de usuario
+    // Registro
     if (
         isset($data['nombre_usuario']) && isset($data['apellido_usuario']) && isset($data['email']) &&
         isset($data['tipo']) && isset($data['password'])
     ) {
         registrarUsuario($data['nombre_usuario'], $data['apellido_usuario'], $data['email'], $data['tipo'], $data['password']);
     }
-    // Login de usuario
+    // Login
     elseif (isset($data['nombre_usuario']) && isset($data['password'])) {
         loginUsuario($data['nombre_usuario'], $data['password']);
     } else {
