@@ -1,18 +1,6 @@
 <?php
 
 require __DIR__ . "/../logs/log.php"; // Importar el archivo de configuración de registro de errores
-require __DIR__ . "/../middleware/auth.php"; // Importar el middleware de autenticación
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Forzar lectura correcta de JSON
-    $data = json_decode(trim(file_get_contents("php://input")), true);
-
-    if (!$data) {
-        http_response_code(400);
-        echo json_encode(["success" => false, "error" => "JSON inválido o vacío"]);
-        exit();
-    }
-}
 
 // Habilitar CORS
 header("Access-Control-Allow-Origin: *");
@@ -26,28 +14,34 @@ if ($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
     exit();
 }
 
-require __DIR__ . "/../controlador/usuarios.php"; // Importar el controlador
+require __DIR__ . "/../controlador/reservas.php"; // Importar el controlador
 
 // Obtener el método de la solicitud HTTP (GET, POST, PUT, DELETE)
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 if ($requestMethod == "GET") {
-    // Solo admin puede listar usuarios
-    requireAuth("admin");
-    listarUsuarios();
+    listarReservas();
 } elseif ($requestMethod == "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    // Registro
-    if (
-        isset($data['nombre_usuario']) && isset($data['apellido_usuario']) && isset($data['email']) &&
-        isset($data['tipo']) && isset($data['password'])
-    ) {
-        registrarUsuario($data['nombre_usuario'], $data['apellido_usuario'], $data['email'], $data['tipo'], $data['password']);
+    if (!$data) {
+        $data = $_POST;
     }
-    // Login
-    elseif (isset($data['nombre_usuario']) && isset($data['password'])) {
-        loginUsuario($data['nombre_usuario'], $data['password']);
+
+    // Crear reserva (validaciones básicas son responsabilidad del controlador)
+    if (
+        isset($data['nombre']) && isset($data['email']) && isset($data['telefono']) &&
+        isset($data['personas']) && isset($data['fecha']) && isset($data['hora'])
+    ) {
+        crearReserva(
+            $data['nombre'],
+            $data['email'],
+            $data['telefono'],
+            $data['personas'],
+            $data['fecha'],
+            $data['hora'],
+            $data['comentarios'] ?? ''
+        );
     } else {
         http_response_code(400);
         echo json_encode([

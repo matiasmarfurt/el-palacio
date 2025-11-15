@@ -95,7 +95,7 @@ fetch("http://Proyecto_final/backend/api/api_pedidos.php", {
 
 ## 📝 Notas importantes
 
-- Todos los datos se envían y reciben en **JSON**.
+- Todos los datos se envían y reciben en formato **JSON**.
 - El total del pedido se calcula automáticamente según los precios actuales de los productos.
 - Se pueden incluir pedidos sin usuario (`id_usuario = null`) para clientes invitados.
 - El número de pedido se genera automáticamente y es único.
