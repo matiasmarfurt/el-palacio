@@ -114,6 +114,25 @@ Reservas: id, fecha, hora, cantidad de personas, usuario, notas.
 
 - La base de datos se encuentra en /backend/bbdd/el_palacio.sql y contiene tablas con relaciones adecuadas para manejar pedidos, detalles de pedidos, productos, usuarios y reservas.
 
+## Instalación
+
+1. Clonar el repositorio:
+
+```bash
+git clone https://github.com/matiasmarfurt/Proyecto_final.git
+```
+2. Importar la base de datos MySQL:
+
+Usar el archivo /backend/bbdd/el_palacio.sql en tu servidor MySQL (por ejemplo, mediante phpMyAdmin o línea de comandos).
+    
+3. Inicializar el entorno local:
+
+    Levantar un servidor web local con Apache, XAMPP, MAMP, o el que prefieras.
+
+    Asegurarte de que el backend y frontend estén accesibles desde tu navegador (ej. http://localhost/Proyecto_final/frontend/page/index.html).
+
+    Tras estos pasos, la aplicación estará lista para probarse en tu entorno local.
+
 ## Notas importantes
 
 - Se aplicó encriptado de contraseñas con `password_hash` y verificación con `password_verify`.
