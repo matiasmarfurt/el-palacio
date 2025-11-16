@@ -1,13 +1,5 @@
 const API_RESERVAS = "../../backend/api/api_reservas.php"; // URL base del endpoint para reservas
 
-// Cargar reservas al iniciar la página (para CRUD en gestión)
-window.onload = function () {
-  if (document.getElementById("reservasContainer")) {
-    listarReservas();
-  }
-  setFechaMinima(); // -- ajustar fecha mínima y horas disponibles
-};
-
 let reservas = []; // Array para almacenar las reservas
 
 // Obtener todas las reservas (GET)

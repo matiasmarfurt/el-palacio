@@ -20,7 +20,6 @@ body {
   min-height: 100vh;
 }
 
-/* Adding navbar overrides for Bootstrap compatibility */
 .navbar {
   background-color: #0a0a0a !important;
 }
@@ -270,7 +269,6 @@ body {
   }
 }
 
-/* Cambiar footer de position: fixed a position: relative */
 .footer {
   position: relative;
   bottom: auto;
@@ -288,7 +286,6 @@ body {
   color: #ffffff !important;
 }
 
-/* Added loading overlay and animation styles */
 .loading-overlay {
   position: fixed;
   top: 0;

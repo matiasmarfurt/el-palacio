@@ -18,7 +18,7 @@ function persistirCarrito() {
   }
 }
 
-// cargar carrito desde localStorage al inicio de la página (si existe)
+// Cargar carrito desde localStorage al inicio de la página (si existe)
 (function cargarCarritoInicial() {
   const guardado = localStorage.getItem("carrito");
   if (guardado) {

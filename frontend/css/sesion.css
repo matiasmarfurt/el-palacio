@@ -22,7 +22,6 @@ body {
   min-height: 100vh;
 }
 
-/* Adding navbar overrides for Bootstrap compatibility */
 .navbar {
   background-color: #0a0a0a !important;
 }
@@ -53,7 +52,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 100px 20px 40px;
-  background: #ffffff; /* Updated to match body background */
+  background: #ffffff;
   position: relative;
 }
 
@@ -131,7 +130,6 @@ body {
 }
 
 .form-group input {
-  /* Cambiar fondo a blanco */
   background: #ffffff;
   border: none;
   border-bottom: 1px solid #e0e0e0;
@@ -141,14 +139,13 @@ body {
   font-size: 0.95rem;
   transition: all 0.3s ease;
   width: 100%;
-  /* Cambiar tipografía a sans-serif */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .form-group input:focus {
   outline: none;
   border-bottom-color: #5c0a0a;
-  background: #ffffff; /* Keep background white on focus as well */
+  background: #ffffff;
   box-shadow: none;
 }
 

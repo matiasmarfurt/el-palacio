@@ -6,7 +6,6 @@
     <title>El Palacio</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/index.css" />
-    <!-- Agregar estilos del carrito -->
     <link rel="stylesheet" href="../css/carrito.css" />
   </head>
 
@@ -43,7 +42,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="#contacto">Contacto</a>
               </li>
-              <!-- Elemento dinámico que mostrará el nombre del usuario o el icono de login -->
               <li class="nav-item">
                 <a class="nav-link" href="login.html">👤</a>
               </li>
@@ -53,7 +51,6 @@
       </nav>
     </header>
 
-    <!-- Simplified hero section with minimal content -->
     <section id="inicio" class="hero-section">
       <div class="container text-center">
         <h1>El Palacio</h1>
@@ -61,7 +58,6 @@
       </div>
     </section>
 
-    <!-- Simplified carta section with better spacing -->
     <section id="carta" class="carta-section">
       <div class="container">
         <h2 class="section-title">Nuestra Carta</h2>
@@ -109,7 +105,6 @@
       <div class="grid-container" id="pastasContainer"></div>
     </header>
 
-    <!-- Simplified reservations section in Spanish -->
     <section id="reservas" class="section">
       <div class="container">
         <h2 class="section-title">Reservas</h2>
@@ -201,13 +196,11 @@
       </div>
     </section>
 
-    <!-- New location section with Google Maps -->
     <section id="ubicacion" class="section">
       <div class="container">
         <h2 class="section-title">¿Dondé nos encontramos?</h2>
         <p class="section-subtitle">Visítanos en Colonia del Sacramento</p>
 
-        <!-- Improved map container with better styling -->
         <div class="map-container">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.8!2d-57.8397!3d-34.4628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x950b1e1e1e1e1e1e%3A0x1e1e1e1e1e1e1e1e!2sGral.%20Flores%20462%2C%2070000%20Colonia%20del%20Sacramento%2C%20Departamento%20de%20Colonia!5e0!3m2!1ses!2suy!4v1234567890123!5m2!1ses!2suy"
@@ -222,7 +215,6 @@
           </iframe>
         </div>
 
-        <!-- Redesigned location info cards with icons and better styling -->
         <div class="location-info-grid">
           <div class="location-card">
             <div class="location-icon">
@@ -301,7 +293,6 @@
       </div>
     </section>
 
-    <!-- Simplified contact section in Spanish -->
     <section id="contacto" class="contact-section">
       <div class="container">
         <h2 class="section-title">Contacto</h2>
@@ -407,8 +398,6 @@
       </div>
     </div>
 
-    <!-- Agregar carrito de compras minimalista -->
-    <!-- Botón flotante del carrito -->
     <button class="carrito-flotante" onclick="abrirCarrito()">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -418,14 +407,12 @@
       <span class="carrito-badge" id="carritoBadge">0</span>
     </button>
 
-    <!-- Overlay oscuro -->
     <div
       class="carrito-overlay"
       id="carritoOverlay"
       onclick="cerrarCarrito()"
     ></div>
 
-    <!-- Panel lateral del carrito -->
     <div class="carrito-panel" id="carritoPanel">
       <div class="carrito-header">
         <h2>Carrito</h2>
@@ -449,7 +436,6 @@
           <span class="carrito-total-precio" id="carritoTotal">$0</span>
         </div>
 
-        <!-- Botones de pago sin emojis -->
         <div class="carrito-metodos-pago">
           <button
             class="carrito-btn-pago"

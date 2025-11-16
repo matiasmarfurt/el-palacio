@@ -1,212 +1,152 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Gestión de Productos - El Palacio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/gestion.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestión de Productos - El Palacio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <body>
-    <!-- Added restaurant-style header navigation -->
-    <header class="admin-header">
-      <div class="header-container">
-        <div class="brand">
-          <h1>El Palacio</h1>
-          <span class="subtitle">Panel de Gestión</span>
-        </div>
-        <nav class="admin-nav">
-          <a href="index.html" class="nav-link">Volver al sitio</a>
-          <a href="#" class="nav-link" id="userLinkAdmin">Usuario</a>
-          <a href="login.html" class="nav-link">Cerrar sesión</a>
-        </nav>
-      </div>
-    </header>
+  <link rel="stylesheet" href="../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../css/gestion.css" />
+</head>
 
-    <div class="main-container">
-      <!-- Agregar pestañas de navegación -->
-      <div class="tabs-container">
-        <button class="tab-btn active" onclick="cambiarTab('productos')">
-          Productos
-        </button>
-        <button class="tab-btn" onclick="cambiarTab('pedidos')">Pedidos</button>
-        <button class="tab-btn" onclick="cambiarTab('clientes')">
-          Usuarios
-        </button>
-        <button class="tab-btn" onclick="cambiarTab('reservas')">
-          Reservas
-        </button>
-      </div>
+<body>
+  <header class="admin-header py-3">
+  <div class="container d-flex flex-column flex-md-row flex-wrap justify-content-between align-items-center">
+    <div class="brand mb-2 mb-md-0 text-center text-md-start">
+      <h1 class="h3 mb-0">El Palacio</h1>
+      <span class="small">Panel de Gestión</span>
+    </div>
+    <nav class="d-flex flex-column flex-md-row flex-wrap justify-content-center justify-content-md-end">
+      <a href="index.html" class="nav-link px-2">Volver al sitio</a>
+      <a href="#" class="nav-link px-2" id="userLinkAdmin">Usuario</a>
+      <a href="login.html" class="nav-link px-2">Cerrar sesión</a>
+    </nav>
+  </div>
+</header>
 
-      <!-- Restructured layout with better visual hierarchy -->
-      <div class="content-wrapper">
-        <!-- Tab de Productos -->
-        <div id="tabProductos" class="tab-content active">
-          <!-- Enhanced form section with restaurant styling -->
-          <section class="form-section">
-            <div class="section-header">
-              <h2>Agregar Nuevo Producto</h2>
-              <p class="section-description">
-                Complete los datos del producto para agregarlo al menú
-              </p>
-            </div>
 
-            <form
-              id="formAgregarProducto"
-              class="product-form"
-              onsubmit="event.preventDefault(); agregarProductoDesdeFormulario();"
-            >
-              <div class="form-grid">
-                <div class="form-field">
-                  <label class="field-label" for="nombreProducto"
-                    >Nombre del Producto</label
-                  >
-                  <input
-                    type="text"
-                    id="nombreProducto"
-                    class="field-input"
-                    placeholder="Ej: Filet Mignon"
-                    required
-                  />
-                </div>
+  <div class="main-container">
+    <!-- Agregar pestañas de navegación -->
+    <div class="tabs-container d-flex flex-wrap">
+      <button class="tab-btn active" onclick="cambiarTab('productos')">Productos</button>
+      <button class="tab-btn" onclick="cambiarTab('pedidos')">Pedidos</button>
+      <button class="tab-btn" onclick="cambiarTab('clientes')">Usuarios</button>
+      <button class="tab-btn" onclick="cambiarTab('reservas')">Reservas</button>
+    </div>
 
-                <!-- Cambiar input de categoría a select con opciones predefinidas -->
-                <div class="form-field">
-                  <label class="field-label" for="categoriaProducto"
-                    >Categoría</label
-                  >
-                  <select id="categoriaProducto" class="field-input" required>
-                    <option value="">Seleccione una categoría</option>
-                    <option value="Carnes">Carnes</option>
-                    <option value="Pastas">Pastas</option>
-                    <option value="Bebidas">Bebidas</option>
-                    <option value="Postres">Postres</option>
-                    <option value="Entradas">Entradas</option>
-                    <option value="Ensaladas">Ensaladas</option>
-                  </select>
-                </div>
 
-                <div class="form-field full-width">
-                  <label class="field-label" for="descripcionProducto"
-                    >Descripción</label
-                  >
-                  <textarea
-                    id="descripcionProducto"
-                    class="field-input field-textarea"
-                    placeholder="Descripción detallada del producto"
-                    rows="3"
-                    required
-                  ></textarea>
-                </div>
+    <div class="content-wrapper">
+      <!-- Tab de Productos -->
+      <div id="tabProductos" class="tab-content active">
+        <section class="form-section">
+          <div class="section-header">
+            <h2>Agregar Nuevo Producto</h2>
+            <p class="section-description">
+              Complete los datos del producto para agregarlo al menú
+            </p>
+          </div>
 
-                <div class="form-field">
-                  <label class="field-label" for="precioProducto"
-                    >Precio ($)</label
-                  >
-                  <input
-                    type="number"
-                    id="precioProducto"
-                    class="field-input"
-                    placeholder="0.00"
-                    step="0.01"
-                    required
-                  />
-                </div>
-
-                <!-- Agregar campo para subir imagen -->
-                <div class="form-field">
-                  <label class="field-label" for="imagenProducto"
-                    >Imagen del Producto</label
-                  >
-                  <input
-                    type="file"
-                    id="imagenProducto"
-                    class="field-input"
-                    accept="image/*"
-                  />
-                  <small style="color: #666; font-size: 0.85rem"
-                    >Formatos: JPG, PNG, GIF (máx. 5MB)</small
-                  >
-                </div>
+          <form id="formAgregarProducto" class="product-form"
+            onsubmit="event.preventDefault(); agregarProductoDesdeFormulario();">
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="field-label" for="nombreProducto">Nombre del Producto</label>
+                <input type="text" id="nombreProducto" class="field-input" placeholder="Ej: Filet Mignon" required />
               </div>
 
-              <button type="submit" class="btn-submit">
-                <span>Agregar Producto</span>
-              </button>
-            </form>
-          </section>
+              <div class="form-field">
+                <label class="field-label" for="categoriaProducto">Categoría</label>
+                <select id="categoriaProducto" class="field-input" required>
+                  <option value="">Seleccione una categoría</option>
+                  <option value="Carnes">Carnes</option>
+                  <option value="Pastas">Pastas</option>
+                  <option value="Bebidas">Bebidas</option>
+                  <option value="Postres">Postres</option>
+                  <option value="Entradas">Entradas</option>
+                  <option value="Ensaladas">Ensaladas</option>
+                </select>
+              </div>
 
-          <!-- Enhanced products list section -->
-          <section class="products-section">
-            <div class="section-header">
-              <h2>Lista de Productos</h2>
-              <p class="section-description">
-                Gestione todos los productos del menú
-              </p>
+              <div class="form-field full-width">
+                <label class="field-label" for="descripcionProducto">Descripción</label>
+                <textarea id="descripcionProducto" class="field-input field-textarea"
+                  placeholder="Descripción detallada del producto" rows="3" required></textarea>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label" for="precioProducto">Precio ($)</label>
+                <input type="number" id="precioProducto" class="field-input" placeholder="0.00" step="0.01" required />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label" for="imagenProducto">Imagen del Producto</label>
+                <input type="file" id="imagenProducto" class="field-input" accept="image/*" />
+                <small style="color: #666; font-size: 0.85rem">Formatos: JPG, PNG, GIF (máx. 5MB)</small>
+              </div>
             </div>
 
-            <div class="search-container">
-              <input
-                type="text"
-                id="buscadorProductos"
-                class="search-input"
-                placeholder="Buscar por nombre, descripción o categoría..."
-              />
-            </div>
+            <button type="submit" class="btn-submit">
+              <span>Agregar Producto</span>
+            </button>
+          </form>
+        </section>
 
-            <div id="productosContainer" class="products-container"></div>
-          </section>
-        </div>
+        <section class="products-section">
+          <div class="section-header">
+            <h2>Lista de Productos</h2>
+            <p class="section-description">
+              Gestione todos los productos del menú
+            </p>
+          </div>
 
-        <!-- Tab de Pedidos -->
-        <div id="tabPedidos" class="tab-content">
-          <section class="products-section">
-            <div class="section-header">
-              <h2>Gestión de Pedidos</h2>
-              <p class="section-description">
-                Administre todos los pedidos del restaurante
-              </p>
-            </div>
+          <div class="search-container">
+            <input type="text" id="buscadorProductos" class="search-input"
+              placeholder="Buscar por nombre, descripción o categoría..." />
+          </div>
 
-            <div class="search-container">
-              <input
-                type="text"
-                id="buscadorPedidos"
-                class="search-input"
-                placeholder="Buscar por número de pedido, cliente o estado..."
-              />
-            </div>
-
-            <div id="pedidosContainer" class="products-container"></div>
-          </section>
-        </div>
-
-        <!-- Tab de Clientes -->
-        <div id="tabClientes" class="tab-content">
-          <section class="products-section">
-            <div class="section-header">
-              <h2>Gestión de Usuarios</h2>
-              <p class="section-description">
-                Administre la información de los usuarios registrados
-              </p>
-            </div>
-
-            <div class="search-container">
-              <input
-                type="text"
-                id="buscadorClientes"
-                class="search-input"
-                placeholder="Buscar por nombre o email..."
-              />
-            </div>
-
-            <div id="usuariosContainer" class="products-container"></div>
-          </section>
-        </div>
+          <div id="productosContainer" class="products-container"></div>
+        </section>
       </div>
-   
+
+      <!-- Tab de Pedidos -->
+      <div id="tabPedidos" class="tab-content">
+        <section class="products-section">
+          <div class="section-header">
+            <h2>Gestión de Pedidos</h2>
+            <p class="section-description">
+              Administre todos los pedidos del restaurante
+            </p>
+          </div>
+
+          <div class="search-container">
+            <input type="text" id="buscadorPedidos" class="search-input"
+              placeholder="Buscar por número de pedido, cliente o estado..." />
+          </div>
+
+          <div id="pedidosContainer" class="products-container"></div>
+        </section>
+      </div>
+
+      <!-- Tab de Clientes -->
+      <div id="tabClientes" class="tab-content">
+        <section class="products-section">
+          <div class="section-header">
+            <h2>Gestión de Usuarios</h2>
+            <p class="section-description">
+              Administre la información de los usuarios registrados
+            </p>
+          </div>
+
+          <div class="search-container">
+            <input type="text" id="buscadorClientes" class="search-input" placeholder="Buscar por nombre o email..." />
+          </div>
+
+          <div id="usuariosContainer" class="products-container"></div>
+        </section>
+      </div>
+    </div>
+
 
     <!-- Tab de Reservas -->
     <div id="tabReservas" class="tab-content">
@@ -219,15 +159,18 @@
         </div>
 
         <div class="search-container">
-          <input
-            type="text"
-            id="buscadorReservas"
-            class="search-input"
-            placeholder="Buscar por nombre, email o fecha..."
-          />
+          <input type="text" id="buscadorReservas" class="search-input"
+            placeholder="Buscar por nombre, email o fecha..." />
         </div>
- </div>
+
         <div id="reservasContainer" class="products-container"></div>
+
+        <!-- Form de reservas -->
+        <form id="formReserva">
+          <!-- campos del form aquí -->
+        </form>
+
+        <div id="mensaje-reserva"></div>
       </section>
     </div>
 
@@ -362,13 +305,14 @@
         );
       };
     </script>
-  </body>
-  <!-- Añadir scripts de gestión-->
-  <script src="../js/gestionUsuarios.js"></script>
-  <script src="../js/gestionProductos.js"></script>
-  <script src="../js/gestionPedidos.js"></script>
-  <script src="../js/gestionReservas.js"></script>
+</body>
+<!-- Añadir scripts de gestión-->
+<script src="../js/gestionUsuarios.js"></script>
+<script src="../js/gestionProductos.js"></script>
+<script src="../js/gestionPedidos.js"></script>
+<script src="../js/gestionReservas.js"></script>
 
-  <!-- Added navbar.js to enable user dropdown on admin panel -->
-  <script src="../js/navbar.js"></script>
+<!-- Añadir NavBar-->
+<script src="../js/navbar.js"></script>
+
 </html>
