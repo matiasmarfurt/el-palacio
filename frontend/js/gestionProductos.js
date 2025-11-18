@@ -14,6 +14,30 @@ function listarProductos() {
     .catch((err) => console.error("Error al obtener productos:", err));
 }
 
+function agregarProductoDesdeFormulario() {
+  const nombre = document.getElementById("nombreProducto").value.trim();
+  const categoria = document.getElementById("categoriaProducto").value.trim();
+  const descripcion = document.getElementById("descripcionProducto").value.trim();
+  const precio = document.getElementById("precioProducto").value.trim();
+  const imagenInput = document.getElementById("imagenProducto");
+
+  // Si el usuario subió una imagen → usar FormData
+  if (imagenInput.files.length > 0) {
+    const formData = new FormData();
+    formData.append("nombre", nombre);
+    formData.append("categoria", categoria);
+    formData.append("descripcion", descripcion);
+    formData.append("precio", precio);
+    formData.append("imagen", imagenInput.files[0]);
+
+    agregarProductoConImagen(formData);
+    return;
+  }
+
+  // Si no hay imagen → JSON normal
+  agregarProducto(nombre, descripcion, precio, categoria);
+}
+
 // Mostrar tabla de productos
 function mostrarTablaProductos(productos) {
   const container = document.getElementById("productosContainer");
@@ -68,6 +92,7 @@ function mostrarTablaProductos(productos) {
                         document.getElementById('modificarDescripcion').value='${descripcion}';
                         document.getElementById('modificarPrecio').value='${p.precio}';
                         document.getElementById('modificarCategoria').value='${categoria}';
+                        document.getElementById('imagenActual').src='../../backend/img/${p.imagen}';
                     ">Modificar</button>
                 </td>
             </tr>
@@ -79,13 +104,34 @@ function mostrarTablaProductos(productos) {
             </table>
         </div>
         <form id="formModificar" style="display:none;" onsubmit="enviarModificacion(event)">
-            <input type="hidden" id="modificarId">
-            <label>Nombre: <input type="text" id="modificarNombre" required></label>
-            <label>Descripción: <input type="text" id="modificarDescripcion" required></label>
-            <label>Precio: <input type="text" id="modificarPrecio" required></label>
-            <label>Categoria: <input type="text" id="modificarCategoria" required></label>
-            <button type="submit">Guardar</button>
-        </form>
+    <input type="hidden" id="modificarId">
+
+    <label>Nombre:
+        <input type="text" id="modificarNombre" required>
+    </label>
+
+    <label>Descripción:
+        <input type="text" id="modificarDescripcion" required>
+    </label>
+
+    <label>Precio:
+        <input type="number" id="modificarPrecio" required>
+    </label>
+
+    <label>Categoría:
+        <input type="text" id="modificarCategoria" required>
+    </label>
+
+    <label>Imagen actual:</label>
+    <img id="imagenActual" width="120" style="display:block; margin-bottom:10px; border-radius:6px">
+
+    <label>Nueva imagen (opcional):
+        <input type="file" id="modificarImagen" accept="image/*">
+    </label>
+
+    <button type="submit">Guardar</button>
+</form>
+
     `;
 
   container.innerHTML = html;
