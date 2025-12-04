@@ -119,7 +119,7 @@ Reservas: id, fecha, hora, cantidad de personas, usuario, notas.
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/matiasmarfurt/Proyecto_final.git
+git clone https://github.com/matiasmarfurt/el-palacio.git
 ```
 2. Importar la base de datos MySQL:
 
@@ -129,7 +129,7 @@ Usar el archivo /backend/bbdd/el_palacio.sql en tu servidor MySQL (por ejemplo, 
 
     Levantar un servidor web local con Apache, XAMPP, MAMP, o el que prefieras.
 
-    Asegurarte de que el backend y frontend estén accesibles desde tu navegador (ej. http://localhost/Proyecto_final/frontend/page/index.html).
+    Asegurarte de que el backend y frontend estén accesibles desde tu navegador (ej. http://localhost/el-palacio/frontend/page/index.html).
 
     Tras estos pasos, la aplicación estará lista para probarse en tu entorno local.
 
